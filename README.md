@@ -12,7 +12,7 @@
 - lombok
 - junit
 - mySQL driver
-## 2020.1.16
+## 2020.3.16
 ### init
 ```
 - 构建Teacher类，包含Teacher的用户名、密码、选择人数名额、入选范围属性
