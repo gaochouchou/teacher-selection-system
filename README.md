@@ -12,12 +12,19 @@
 - lombok
 - junit
 - mySQL driver
+## 2020.3.24
+### 增加持久化操作
+- 构建BaseReposirory接口，实现refresh方法
+- 构建CourseReposirory接口
+- 构建CourseSelectionReposirory接口
+- 构建StudentReposirory接口（基于学号查询学生）
+- 构建TeacherReposirory接口（基于教师登陆用户名查询教师，基于id更新已选学生数量）
+- 增加StudentReposiroryTest测试类
+- 增加TeacherReposiroryTest测试类
 ## 2020.3.16
 ### init
-```
 - 构建Teacher类，包含Teacher的用户名、密码、选择人数名额、入选范围属性
 - 构建Student类，包含Student的姓名、学号、是否被列为入选、所选老师_id（默认为空）属性
 - 构建Course类，包含Course的课程名字、最小成绩、权重（学生所选方向也将被纳入此表记录）
 - 构建CourseSelection类，包含CourseSelection的成绩、学生_id、课程_id属性
 - 创建sprigboot工程，添加依赖，配置项目
-```
