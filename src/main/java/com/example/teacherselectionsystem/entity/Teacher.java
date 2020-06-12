@@ -1,5 +1,6 @@
 package com.example.teacherselectionsystem.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -18,6 +19,7 @@ public class Teacher {
     @Column(unique = true, nullable = false)
     private String username;
     @Column(nullable = false)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
     private int actualNum;
     private int qualifiedNum;
