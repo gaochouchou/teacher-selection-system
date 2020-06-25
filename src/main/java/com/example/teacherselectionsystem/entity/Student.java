@@ -1,5 +1,6 @@
 package com.example.teacherselectionsystem.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -17,6 +18,10 @@ public class Student {
     private String name;
     private int studentId;
     private boolean ifSelected;
+    @Column(unique = true, nullable = false)
+    private String username;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private String password;
     @ManyToOne
     private Teacher teacher;
     @OneToMany(mappedBy = "student")

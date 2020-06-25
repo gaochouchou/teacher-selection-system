@@ -18,6 +18,7 @@ public class StudentRepositoryTest {
         Student student = new Student();
         student.setStudentId(2017123457);
         student.setName("Jie");
+        student.setUsername("2017214218");
         studentRepository.save(student);
     }
 

@@ -18,13 +18,16 @@ public class InitComponent implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        int num = 1001;
-        Teacher teacher = teacherService.getTeacherById(num);
+        Teacher teacher = new Teacher();
+        int num = 1;
+        teacher = teacherService.getTeacher("2017214218");
         if(teacher == null){
             Teacher t = new Teacher();
             t.setId(num);
-            t.setUsername("123");
-            t.setPassword(encoder.encode(String.valueOf(num)));
+            t.setUsername("2017214218");
+            t.setName("JIE");
+            t.setQualifiedNum(15);
+            t.setPassword(encoder.encode("2017214218"));
             teacherService.addTeacher(t);
         }
     }
