@@ -1,6 +1,6 @@
 # 导师学生双选系统
 ## 项目描述
-实现毕业生毕业设计双向选择。教师可登陆后可设置相应权重以及参数，并能按照指定顺序对学生进行排序。学生无需登录，验证学号确认后即可选择该老师为导师
+实现毕业生毕业设计双向选择。教师可登陆后可查看数据统计信息，包含已选学生名单，课程权值，指导学生和已选学生数量，并能设置相应权重以及参数，从Excel中批量导入学生，单独内定学生，修改自己可指导学生的数量。学生登陆后可查看是否登陆，输入成绩，后台判定是否符合入选范围，并有友好的人机交互体验。
 ## 开发环境
 #### 开发工具
 - idea 2020
@@ -12,6 +12,26 @@
 - lombok
 - junit
 - mySQL driver
+- security
+- devtools
+## 2020.6.27
+### 增加控制层和服务层组件
+- StudentController 学生请求控制层
+- StudentService 学生服务层
+- RequestComponent 实现处理携带的请求体
+## 2020.6.26
+### 增加Token和加密解密组件
+- EncryptComponent 加密解密组件
+- MyToken 携带Token体
+- TeacherService 教师服务层
+- TeacherController 教师请求控制层
+- 更新TeacherReposirory查询方法
+## 2020.5.20
+### 增加初始化组件
+- init component 初始化系统时将会创建教师
+- LoginController 控制登录组件
+- LoginIntercepterc 登陆拦截器
+- TeacherIntercepter 教师权限拦截器
 ## 2020.3.24
 ### 增加持久化操作
 - 构建BaseReposirory接口，实现refresh方法
