@@ -1,6 +1,8 @@
 package com.example.teacherselectionsystem.component;
 
+import com.example.teacherselectionsystem.entity.Student;
 import com.example.teacherselectionsystem.entity.Teacher;
+import com.example.teacherselectionsystem.service.StudentService;
 import com.example.teacherselectionsystem.service.TeacherService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
@@ -15,6 +17,9 @@ public class InitComponent implements InitializingBean {
     PasswordEncoder encoder;
     @Autowired
     TeacherService teacherService;
+    @Autowired
+    StudentService studentService;
+
 
     @Override
     public void afterPropertiesSet() throws Exception {
@@ -29,6 +34,18 @@ public class InitComponent implements InitializingBean {
             t.setQualifiedNum(15);
             t.setPassword(encoder.encode("2017214218"));
             teacherService.addTeacher(t);
+        }
+
+        Student student = new Student();
+        int studnetnum =1;
+        student = studentService.getStudent(2017214218);
+        if(student == null ){
+            Student s = new Student();
+            s.setIfSelected(false);
+            s.setPassword(encoder.encode(String.valueOf(2017214218)));
+            s.setName("JIE");
+            s.setStudentId(2017214218);
+            studentService.addStudent(s);
         }
     }
 }

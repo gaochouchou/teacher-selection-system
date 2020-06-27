@@ -2,7 +2,9 @@ package com.example.teacherselectionsystem.controller;
 
 import com.example.teacherselectionsystem.component.EncryptComponent;
 import com.example.teacherselectionsystem.component.MyToken;
+import com.example.teacherselectionsystem.entity.Student;
 import com.example.teacherselectionsystem.entity.Teacher;
+import com.example.teacherselectionsystem.service.StudentService;
 import com.example.teacherselectionsystem.service.TeacherService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,24 +34,46 @@ public class LoginController {
     private PasswordEncoder encoder;
     @Autowired
     private EncryptComponent encrypt;
+    @Autowired
+    private  StudentService studentService;
 
     @PostMapping("teacherLogin")
     public Map login(@RequestBody Teacher login, HttpServletResponse response) {
-        log.debug("{}", login.getPassword());
         Teacher teacher = new Teacher();
         teacher = teacherService.getTeacher(login.getUsername());
         if(teacher == null){
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "用户名密码错误");
         }
-        log.debug("控制层收到{}", teacher);
-        log.debug("password比较{}",encoder.matches(login.getPassword(),teacher.getPassword()));
+//        log.debug("控制层收到{}", teacher);
+//        log.debug("password比较{}",encoder.matches(login.getPassword(),teacher.getPassword()));
         if(encoder.matches(login.getPassword(),teacher.getPassword())){
-            log.debug("密码比对成功");
+//            log.debug("密码比对成功");
             MyToken token = new MyToken(teacher.getId(),MyToken.TEACHER);
             String auth = encrypt.encryptToken(token);
             response.setHeader(MyToken.AUTHORIZATION, auth);
             return Map.of("role", roleTeacher);
         }
+//        log.debug("结尾抛出异常");
+        throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "用户名密码错误");
+    }
+
+    @PostMapping("studentLogin")
+    public Map slogin(@RequestBody Student login, HttpServletResponse response){
+        log.debug("{}", login);
+        Student student = new Student();
+        student = studentService.getStudent(login.getStudentId());
+        if(student == null){
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "用户名密码错误");
+        }
+        log.debug("找到student{}", student);
+        if(encoder.matches(login.getPassword(),student.getPassword())){
+            MyToken token = new MyToken(student.getId(),MyToken.STUDENT);
+            log.debug("token{}", token);
+            String auth = encrypt.encryptToken(token);
+            response.setHeader(MyToken.AUTHORIZATION, auth);
+            return Map.of("role", roleStudent);
+        }
+        log.debug("密码匹配失败");
         throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "用户名密码错误");
     }
 }

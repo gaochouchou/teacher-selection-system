@@ -2,6 +2,7 @@ package com.example.teacherselectionsystem.repository;
 
 import com.example.teacherselectionsystem.entity.CourseSelection;
 import com.example.teacherselectionsystem.entity.Student;
+import com.example.teacherselectionsystem.entity.Teacher;
 import com.example.teacherselectionsystem.repository.baseRepository.BaseRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -33,7 +34,11 @@ public interface StudentRepository extends BaseRepository<Student,Integer> {
      * @return
      */
     @Query("select s.courseSelections FROM Student s WHERE s.studentId=:studentId")
-    List<CourseSelection> list(@Param("studentId") int studentId);
+    List<CourseSelection> listCourses(@Param("studentId") int studentId);
+
+
+    @Query("select s from Student s where s.id=:id")
+    Student findbyid(@Param("id") int id);
 
 
 }

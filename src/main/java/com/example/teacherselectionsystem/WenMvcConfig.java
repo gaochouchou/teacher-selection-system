@@ -19,7 +19,7 @@ public class WenMvcConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(loginInterceptor)
                 .addPathPatterns("/api/**")
-                .excludePathPatterns("/api/login", "/api/test");
+                .excludePathPatterns("/api/teacherLogin","/api/studentLogin", "/api/test");
 
         registry.addInterceptor(teacherIntercepter)
                 .addPathPatterns("/api/teacher/**");

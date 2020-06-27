@@ -32,8 +32,11 @@ public class TeacherService {
     }
 
     public Teacher getTeacher(String username){
-        log.debug("服务层{}", username);
-        log.debug("服务层查到teacher{}", teacherRepository.find(username));
         return teacherRepository.find(username);
     }
+
+    public void updateActual(){
+        teacherRepository.update(1);
+    }
+
 }

@@ -1,3 +1,60 @@
+###
+POST http://localhost:8080/api/teacher/selectStudent
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "studentId": 2017214213,
+  "name": "杨恩宇"
+}
+###
+POST http://localhost:8080/api/teacher/addStudent
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "studentId": 2017214218,
+  "name": "grj"
+}
+
+###
+POST http://localhost:8080/api/teacher/postAmount
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "qualifiedNum": 30
+
+
+}
+###
+POST http://localhost:8080/api/teacher/setWeight
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "id": 1,
+  "weight": 2.0,
+  "minScore": 80
+
+}
+
+###
+POST http://localhost:8080/api/student/submit
+Content-Type: application/json
+Authorization: {{stoken}}
+
+{
+  "courses": [{ "score": 98, "course": { "name": "Frame" } },
+         { "score": 90, "course": { "name": "web" } },
+         { "score":80, "course": { "name": "Java" } }]
+
+}
+
+###
+GET http://localhost:8080/api/student/index
+Authorization: {{stoken}}
+
 ### 登录成功后，向此再发请求；返回教师信息，以及全部课程
 GET http://localhost:8080/api/teacher/index
 Authorization: {{token}}
@@ -53,5 +110,17 @@ Content-Type: application/json
 }
 
 > {% client.global.set("token", response.headers.valueOf("Authorization")); %}
+###
+
+### 全局变量，如果http测试文件被改动，可能失效。须重修登录
+POST http://localhost:8080/api/studentLogin
+Content-Type: application/json
+
+{
+  "studentId" : "2017214218",
+  "password": "2017214218"
+
+}
+> {% client.global.set("stoken", response.headers.valueOf("Authorization")); %}
 ###
 
